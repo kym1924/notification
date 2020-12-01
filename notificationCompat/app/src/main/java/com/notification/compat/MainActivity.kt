@@ -23,7 +23,9 @@ class MainActivity : AppCompatActivity() {
             val builder = NotificationCompat.Builder(this, getString(R.string.app_name))
                 .setSmallIcon(R.drawable.ic_alarm)
                 .setContentTitle("My notification")
-                .setContentText("Hello World!")
+                .setContentText("Much longer text that cannot fit one line you can use .setStyle")
+                .setStyle(NotificationCompat.BigTextStyle()
+                    .bigText("Much longer text that cannot fit one line you can use .setStyle"))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
             with(NotificationManagerCompat.from(this)) {
