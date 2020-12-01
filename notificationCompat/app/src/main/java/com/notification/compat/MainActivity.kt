@@ -2,7 +2,9 @@ package com.notification.compat
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -19,13 +21,19 @@ class MainActivity : AppCompatActivity() {
 
         createNotificationChannel()
 
-        btn_notification.setOnClickListener {
+        btn_notification.setOnClickListener{
+            // Create an explicit intent for an Activity in your app
+            val intent = Intent(this, IntentActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+
+            val pendingIntent : PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+
             val builder = NotificationCompat.Builder(this, getString(R.string.app_name))
                 .setSmallIcon(R.drawable.ic_alarm)
                 .setContentTitle("My notification")
-                .setContentText("Much longer text that cannot fit one line you can use .setStyle")
-                .setStyle(NotificationCompat.BigTextStyle()
-                    .bigText("Much longer text that cannot fit one line you can use .setStyle"))
+                .setContentText("Hello World")
+                .setContentIntent(pendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
             with(NotificationManagerCompat.from(this)) {
