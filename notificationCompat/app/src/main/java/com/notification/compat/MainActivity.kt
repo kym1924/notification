@@ -35,6 +35,8 @@ class MainActivity : AppCompatActivity() {
                 .setContentText("Hello World")
                 .setContentIntent(pendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                // automatically removes the notification when the user taps it.
+                .setAutoCancel(true)
 
             with(NotificationManagerCompat.from(this)) {
                 // notificationId is a unique int for each notification that you must define
