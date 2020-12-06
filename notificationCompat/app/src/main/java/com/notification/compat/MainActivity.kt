@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.widget.RemoteViews
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -29,10 +30,15 @@ class MainActivity : AppCompatActivity() {
 
             val pendingIntent : PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
 
+            // ConstraintLayout can't be used for RemoteViews
+            val convertView = RemoteViews(packageName, R.layout.layout_notification)
+            convertView.setImageViewResource(R.id.img_custom_notification, R.mipmap.ic_launcher_round)
+            convertView.setTextViewText(R.id.tv_title, "Custom notification")
+            convertView.setTextViewText(R.id.tv_content, "Custom notification should be LinearLayout")
+
             val builder = NotificationCompat.Builder(this, getString(R.string.app_name))
                 .setSmallIcon(R.drawable.ic_alarm)
-                .setContentTitle("My notification")
-                .setContentText("Hello World")
+                .setCustomContentView(convertView)
                 .setContentIntent(pendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 // automatically removes the notification when the user taps it.
