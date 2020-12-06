@@ -7,6 +7,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.RemoteViews
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
@@ -45,8 +47,10 @@ class MainActivity : AppCompatActivity() {
                 .setAutoCancel(true)
 
             with(NotificationManagerCompat.from(this)) {
-                // notificationId is a unique int for each notification that you must define
-                notify(notificationId, builder.build())
+                Handler(Looper.getMainLooper()).postDelayed ({
+                    // notificationId is a unique int for each notification that you must define
+                    notify(notificationId, builder.build())
+                }, 10000)
             }
         }
     }
