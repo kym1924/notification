@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             calendar.set(Calendar.MINUTE, 0)
             val intent = Intent(this, AlarmReceiver::class.java)
             val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, AlarmManager.INTERVAL_DAY, pendingIntent)
         }
     }
 }
