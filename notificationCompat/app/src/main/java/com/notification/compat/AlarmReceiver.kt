@@ -26,12 +26,17 @@ class AlarmReceiver : BroadcastReceiver() {
         // ConstraintLayout can't be used for RemoteViews
         val convertView = RemoteViews(context.packageName, R.layout.layout_notification)
         convertView.setImageViewResource(R.id.img_custom_notification, R.mipmap.ic_launcher_round)
-        convertView.setTextViewText(R.id.tv_title, "Custom notification")
-        convertView.setTextViewText(R.id.tv_content, "Custom notification should be LinearLayout")
+        convertView.setTextViewText(R.id.tv_title, "kym1924")
+        convertView.setTextViewText(R.id.tv_content, "Custom notification")
+
+        val convertHeadUpView = RemoteViews(context.packageName, R.layout.layout_notification_head_up)
+        convertHeadUpView.setImageViewResource(R.id.img_head_logo, R.mipmap.ic_launcher_round)
+        convertHeadUpView.setTextViewText(R.id.tv_head_title, "kym")
 
         val builder = NotificationCompat.Builder(context, context.getString(R.string.app_name))
             .setSmallIcon(R.drawable.ic_alarm)
-            .setCustomContentView(convertView)
+            .setCustomContentView(convertHeadUpView) // setting custom layout for HeadUpView
+            .setCustomBigContentView(convertView) // setting custom layout for Notification
             .setContentIntent(alarmPendingIntent)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             // automatically removes the notification when the user taps it.
